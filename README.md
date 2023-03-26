@@ -27,6 +27,7 @@ To use PowerGenerativeToolkit, you'll need to set the `OPENAI_API_KEY` environme
 Currently, only the `Convert-PGTString` command has been implemented. Here's an example of how to use the command:
 
 ```powershell
+PS> $env:OPENAI_API_KEY = "your api key"
 PS> Import-Module PowerGenerativeToolkit
 PS> "Toshio Yamada", "Saito Hanako" | Convert-PGTString -Example "Daisuke Mutaguchi=D. Mutaguchi"
 T. Yamada
