@@ -39,7 +39,7 @@ Input    Output
 -----    ------
 frog     Temporalis Amphibia
 cat      Felis Magnificus
-dog      Canis Canis Regalis
+dog      Canis Regalis
 
 1, 2, 3 | Convert-PGTString -Example @{before=5; after=10} -IncludeInput
 

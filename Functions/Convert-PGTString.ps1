@@ -44,7 +44,7 @@ Input    Output
 -----    ------
 frog     Temporalis Amphibia
 cat      Felis Magnificus
-dog      Canis Canis Regalis
+dog      Canis Regalis
 
 This example demonstrates the use of Convert-PGTString with the -Rule parameter and -IncludeInput switch. The input strings "frog", "cat", and "dog" are transformed based on the specified rule "transform into a stronger name". The output objects include both the original input strings and their transformed versions.
 
@@ -373,26 +373,26 @@ Now, as you''ll be given various rules and strings as input, continue to apply t
 
         $outRule = $parsedJson.rule
         $outputs = $parsedJson.outputs
-
+        
         if ($null -eq $outputs -or $outputs -isnot [array])
         {
             Write-Error "Failed to parse JSON.`nOriginal string: $jsonString"
             return
         }
-        elseif ($outputs.length -ne $in.Length)
+
+        $length = @($outputs).Length
+        if ($length -ne $in.Length)
         {
-            Write-Warning "The number of input and output elements does not match. There are $($in.Length) input elements, while there are $($outputs.length) output elements."
+            Write-Warning "The number of input and output elements does not match. There are $($in.Length) input elements, while there are $($length) output elements."
+            $length = [math]::Min($length, $in.Length)
         }
 
-        $count = 0
-        $objs = @(foreach ($o in $outputs)
-            {
-                [PSCustomObject]@{
-                    Input  = $in[$count].Trim()
-                    Output = $o
-                }
-                $count++
-            })
+        $objs = 0..($length - 1) | ForEach-Object {
+            [PSCustomObject]@{
+                Input  = $in[$_].Trim()
+                Output = $outputs[$_]
+            }
+        }
 
         if ($IncludeRule)
         {
