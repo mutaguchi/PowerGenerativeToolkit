@@ -78,6 +78,10 @@ PS> Get-EvenNumbers @(1..7)
 
 You can find other examples by running `Get-Help Convert-PGTString -Detailed`.
 
+## Important Note
+
+Functions in the PowerGenerativeToolkit module, such as Convert-PGTString, only invoke the OpenAI API once, even when multiple values are passed as input via a pipeline or parameters. However, if you execute the function within a loop construct like foreach, the API will be called multiple times. It is generally recommended to avoid executing the function within a loop.
+
 ## Disclaimer
 
 Please be aware that this module uses OpenAI's API, which may have associated usage fees. Use the module at your own risk, and always be mindful of potential costs.
@@ -111,6 +115,9 @@ PowerGenerativeToolkitを使用するには、`OPENAI_API_KEY`環境変数にOpe
 他の例は`Get-Help Convert-PGTString -Detailed`で見ることができます。
 
 GPT-3.5/4には日本語も通りますが、英語でRuleやExampleを与えた方が精度が上がるので、適宜、`-CultureInfo en-US`パラメータを指定すると良いでしょう。
+
+## 注意
+PowerGenerativeToolkitモジュールの関数、例えばConvert-PGTStringなどは、パイプラインやパラメータを通じて複数の値が入力された場合でも、OpenAI APIを1回だけ呼び出します。ただし、foreachなどのループ構文内で関数を実行すると、APIが複数回呼び出されてしまいます。通常は、ループ構文内で関数を実行しないよう、注意してください。
 
 ## 免責事項
 

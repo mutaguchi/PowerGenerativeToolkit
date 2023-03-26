@@ -9,6 +9,9 @@ Converts input strings based on the specified rule or examples using the OpenAI 
 .DESCRIPTION
 The Convert-PGTString function uses OpenAI's GPT-3.5-turbo (default) or GPT-4 (when -Gpt4 switch is specified) to transform input strings based on the provided rule or examples. It can handle various transformation scenarios and provides powerful string conversion capabilities. Make sure to set your OpenAI API key in the OPENAI_API_KEY environment variable before using this function.
 
+.NOTES
+The Convert-PGTString function only invokes the OpenAI API once, even when multiple values are passed as input via a pipeline or parameters. However, if you execute the function within a loop construct like foreach, the API will be called multiple times. It is generally recommended to avoid executing the function within a loop.
+
 .PARAMETER InputString
 The input strings to be transformed.
 
