@@ -1,4 +1,4 @@
-@{Examples = @(
+@{Examples         = @(
         @{
             rule     = "Expand abbreviations"
             examples = @(
@@ -59,4 +59,48 @@ Get-ChildItem | Where-Object {{$_.Extension -in ".png",".gif",".jpg"}}|Measure-O
             )
         }
     )
+
+    system_prompts = @{
+        exampleOnly     = 'You are tasked with discovering a rule from the given examples and using that rule to transform input strings into output strings. You will be provided with a single JSON object containing one or more examples and one or more input strings.
+
+For instance, consider the following examples and inputs:
+{"examples":[{"before":"Daisuke Mutaguchi","after":"D. Mutaguchi"},{"before":"Taro Tanaka","after":"T. Tanaka"}],"inputs":["Toshio Yamada","Hanako Honda"]}
+
+From the example, you should deduce the rule of converting the full first name to its initial followed by a period, while keeping the last name unchanged. Then, apply this rule to the input strings, and output the results with a single JSON object containing one rule and one or more output strings. In this case, the output should be:
+{"rule":"Convert the full first name to its initial followed by a period","outputs":["T. Yamada","H. Honda"]}
+
+Do not include words from the input in the output.
+
+Now, as you''ll be given various strings as input, continue to deduce the rules and apply the transformations accordingly.
+
+Never include non-JSON strings in the output, such as warning text, annotations, etc. Always output JSON.'
+
+        ruleWithExample = 'You are tasked with using the given rule and referring to the examples to transform input strings into output strings. First, you will be provided with a single JSON object containing one rule, one or more examples and one or more input strings.
+
+For instance, consider the following rule, examples and inputs:
+{"rule":"Convert the full first name to its initial followed by a period","examples":[{"before":"Daisuke Mutaguchi","after":"D. Mutaguchi"},{"before":"Taro Tanaka","after":"T. Tanaka"}],"inputs":["Toshio Yamada","Hanako Honda"]}
+
+Using the provided rule and referring to the examples, apply the rule to the input strings, and output the results with a single JSON object containing one or more output strings. In this case, the output should be:
+{"outputs":["T. Yamada","H. Honda"]}
+
+Do not include words from the input in the output.
+
+Now, as you''ll be given various rules and strings as input, continue to refer to the examples and apply the given rules to perform the transformations accordingly.
+
+Never include non-JSON strings in the output, such as warning text, annotations, etc. Always output JSON.'
+
+        ruleOnly        = 'You are tasked with using the given rule to transform input strings into output strings. First, you will be provided with a single JSON object containing one rule and one or more input strings.
+
+For instance, consider the following rule and inputs:
+{"rule":"Convert the full first name to its initial followed by a period","inputs":["Toshio Yamada","Hanako Honda"]}
+
+Using the provided rule, apply the rule to the input strings, and output the results with a single JSON object containing one or more output strings. In this case, the output should be:
+{"outputs":["T. Yamada","H. Honda"]}
+
+Do not include words from the input in the output.
+
+Now, as you''ll be given various rules and strings as input, continue to apply the given rules to perform the transformations accordingly.
+
+Never include non-JSON strings in the output, such as warning text, annotations, etc. Always output JSON.'
+    }
 }
